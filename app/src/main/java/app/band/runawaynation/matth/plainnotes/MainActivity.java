@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private CursorAdapter cursorAdapter;
+    private static final int EDITOR_REQUEST_CODE = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +134,6 @@ public class MainActivity extends AppCompatActivity
 
     private void startNewNote(View view) {
         Intent intent = new Intent(this, EditorActivity.class);
-        startActivity(intent);
+        startActivity(intent, EDITOR_REQUEST_CODE);
     }
 }
