@@ -4,6 +4,7 @@ import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -32,9 +33,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         String [] from = {DBOpenHelper.NOTE_TEXT};
-        int [] to = {android.R.id.text2};
+        int [] to = {R.id.noteName};
         cursorAdapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_2, null, from, to, 0);
+                R.layout.note_item, null, from, to, 0);
         ListView list = (ListView) findViewById(android.R.id.list);
         list.setAdapter(cursorAdapter);
 
@@ -44,8 +45,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startNewNote(view);
             }
         });
     }
@@ -129,5 +129,10 @@ public class MainActivity extends AppCompatActivity
 
     private void restartLoader() {
         getLoaderManager().restartLoader(0,null,this);
+    }
+
+    private void startNewNote(View view) {
+        Intent intent = new Intent(this, EditorActivity.class);
+        startActivity(intent);
     }
 }
