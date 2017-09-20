@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -144,7 +145,7 @@ public class MainActivity extends AppCompatActivity
 
     private void startNewNote(View view) {
         Intent intent = new Intent(this, EditorActivity.class);
-        startActivity(intent, EDITOR_REQUEST_CODE);
+        startActivityForResult(intent, EDITOR_REQUEST_CODE);
     }
     
     @Override

@@ -1,8 +1,13 @@
 package app.band.runawaynation.matth.plainnotes;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class EditorActivity extends AppCompatActivity {
 
@@ -23,7 +28,7 @@ public class EditorActivity extends AppCompatActivity {
         
         if(uri == null) {
             action = Intent.ACTION_INSERT;
-            setTitle(getString("New Note"));
+            setTitle("New Note");
         } else {
             action = Intent.ACTION_EDIT;
             noteFilter = DBOpenHelper.NOTE_ID + "=" + uri.getLastPathSegment();
@@ -31,7 +36,7 @@ public class EditorActivity extends AppCompatActivity {
             Cursor cursor = getContentResolver().query(uri,
                                DBOpenHelper.ALL_COLUMNS, noteFilter, null, null);
             cursor.moveToFirst();
-            oldText = cursor.getString(cursor.getColumnIndex(DbOpenHelper.NOTE_TEXT));
+            oldText = cursor.getString(cursor.getColumnIndex(DBOpenHelper.NOTE_TEXT));
             editor.setText(oldText);
             editor.requestFocus();
         }
@@ -43,7 +48,7 @@ public class EditorActivity extends AppCompatActivity {
         switch (action) {
             case Intent.ACTION_INSERT:
                 if (newText.length() == 0) {
-                    setResult(RESULT_CANCELLED);
+                    setResult(RESULT_CANCELED);
                 } else {
                     insertNote(newText);
                 }
@@ -51,7 +56,7 @@ public class EditorActivity extends AppCompatActivity {
                 if (newText.length() == 0) {
                     //deleteNote();
                 } else if (oldText.equals(newText)) {
-                    setResult(RESULT_CANCELLED);
+                    setResult(RESULT_CANCELED);
                 } else {
                     updateNote(newText);
                 }
@@ -67,7 +72,7 @@ public class EditorActivity extends AppCompatActivity {
     }
     
     @Override
-    private void onBackPressed() {
+    public void onBackPressed() {
         finishEditing();
     }
     
@@ -75,7 +80,7 @@ public class EditorActivity extends AppCompatActivity {
         ContentValues values = new ContentValues();
         values.put(DBOpenHelper.NOTE_TEXT, noteText);
         getContentResolver().update(NotesProvider.CONTENT_URI, values, noteFilter, null);
-        Toast.maketext(this, "Note updated", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Note updated", Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK);
     }
 }
