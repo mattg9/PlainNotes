@@ -9,7 +9,6 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startNewNote(view);
+                startNewNote();
             }
         });
     }
@@ -66,6 +65,7 @@ public class MainActivity extends AppCompatActivity
         ContentValues values = new ContentValues();
         values.put(DBOpenHelper.NOTE_TEXT, noteText);
         Uri noteUri = getContentResolver().insert(NotesProvider.CONTENT_URI, values);
+        assert noteUri != null;
         Log.d("MainActivity", "Inserted note" + noteUri.getLastPathSegment());
     }
 
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity
         getLoaderManager().restartLoader(0,null,this);
     }
 
-    private void startNewNote(View view) {
+    private void startNewNote() {
         Intent intent = new Intent(this, EditorActivity.class);
         startActivityForResult(intent, EDITOR_REQUEST_CODE);
     }

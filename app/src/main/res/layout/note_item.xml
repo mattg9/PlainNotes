@@ -9,7 +9,8 @@
         android:src="@mipmap/e73ed3ae"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:id="@+id/noteImage"/>
+        android:id="@+id/noteImage"
+        android:contentDescription="@string/note"/>
 
     <TextView
         android:id="@+id/noteName"
@@ -22,7 +23,8 @@
         android:layout_toRightOf="@+id/noteImage"
         android:maxLines="1"
         android:paddingLeft="20dp"
-        android:text="dummy text"
+        android:paddingStart="20dp"
+        android:paddingRight="20dp"
         android:textColor="@color/list_item_text"
         android:textSize="20sp" />
 

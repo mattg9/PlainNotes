@@ -5,4 +5,8 @@
     <string name="all_deleted">All Notes Deleted</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="new_note">new note</string>
+    <string name="title_activity_editor">Editor</string>
+    <string name="note_deleted">Note Deleted </string>
+    <string name="note">note</string>
+    <string name="delete">Delete</string>
 </resources>

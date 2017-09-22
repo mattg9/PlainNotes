@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 
 /**
  * Created by matth on 9/18/2017.
+ * provide functions to add/update/delete notes
  */
 
 public class NotesProvider extends ContentProvider {

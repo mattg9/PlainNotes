@@ -1,5 +1,6 @@
 package app.band.runawaynation.matth.plainnotes;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
@@ -8,6 +9,8 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class EditorActivity extends AppCompatActivity {
 
@@ -33,8 +36,9 @@ public class EditorActivity extends AppCompatActivity {
             action = Intent.ACTION_EDIT;
             noteFilter = DBOpenHelper.NOTE_ID + "=" + uri.getLastPathSegment();
             
-            Cursor cursor = getContentResolver().query(uri,
+            @SuppressLint("Recycle") Cursor cursor = getContentResolver().query(uri,
                                DBOpenHelper.ALL_COLUMNS, noteFilter, null, null);
+            assert cursor != null;
             cursor.moveToFirst();
             oldText = cursor.getString(cursor.getColumnIndex(DBOpenHelper.NOTE_TEXT));
             editor.setText(oldText);
@@ -51,7 +55,7 @@ public class EditorActivity extends AppCompatActivity {
     
     public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
-            switch (item.getItemId()) {
+            switch (id) {
                 case android.R.id.home:
                     finishEditing();
                     break;
@@ -78,6 +82,7 @@ public class EditorActivity extends AppCompatActivity {
                 } else {
                     insertNote(newText);
                 }
+                break;
             case Intent.ACTION_EDIT:
                 if (newText.length() == 0) {
                     deleteNote();

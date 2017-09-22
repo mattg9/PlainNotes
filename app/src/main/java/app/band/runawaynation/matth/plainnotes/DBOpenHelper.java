@@ -6,9 +6,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 /**
  * Created by matth on 9/18/2017.
+ * Used to open database
  */
 
-public class DBOpenHelper extends SQLiteOpenHelper {
+class DBOpenHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "notes.db";
     private static final int DATABASE_VERSION = 1;
